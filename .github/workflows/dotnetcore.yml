@@ -1,0 +1,20 @@
+name: .NET Core
+on: push
+
+jobs:
+  job:
+    name: Build and Test
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.102
+      - name: Build
+        run: dotnet build OptivumParser --configuration Release
+      - name: Test
+        run: dotnet test OptivumParser.Tests
