@@ -59,9 +59,53 @@ namespace OptivumParser
             var document = BrowsingContext.New().OpenAsync(r => r.Content(file)).Result;
 
             var classSelect = document.All.Where(e => e.TagName.ToLower() == "select").Where(s => s.Attributes.Where(a => a.Name == "name" && a.Value == "oddzialy").Any()).First();
-            var classes = new Dictionary<string, string>();
 
             return classSelect.Children.Where(o => o.Attributes.Any()).ToDictionary(o => o.InnerHtml, o => o.Attributes.First().Value);
+        }
+
+        public Dictionary<string, string> GetTeacherIds(string lessonPlanPath)
+        {
+            ValidatePlan(lessonPlanPath);
+
+            var listUri = new Uri(new Uri(lessonPlanPath), "lista.html");
+            var file = new WebClient().DownloadString(listUri);
+            var document = BrowsingContext.New().OpenAsync(r => r.Content(file)).Result;
+
+            var teacherSelect = document.All.Where(e => e.TagName.ToLower() == "select").Where(s => s.Attributes.Where(a => a.Name == "name" && a.Value == "nauczyciele").Any()).First();
+
+            return teacherSelect.Children.Where(o => o.Attributes.Any()).ToDictionary(o => o.InnerHtml, o => o.Attributes.First().Value);
+        }
+
+        public Dictionary<string, string> GetRoomIds(string lessonPlanPath)
+        {
+            ValidatePlan(lessonPlanPath);
+
+            var listUri = new Uri(new Uri(lessonPlanPath), "lista.html");
+            var file = new WebClient().DownloadString(listUri);
+            var document = BrowsingContext.New().OpenAsync(r => r.Content(file)).Result;
+
+            var roomSelect = document.All.Where(e => e.TagName.ToLower() == "select").Where(s => s.Attributes.Where(a => a.Name == "name" && a.Value == "sale").Any()).First();
+
+            return roomSelect.Children.Where(o => o.Attributes.Any()).ToDictionary(o => o.InnerHtml, o => o.Attributes.First().Value);
+        }
+
+        public (Dictionary<string, string> classes, Dictionary<string, string> teachers, Dictionary<string, string> rooms) GetAllIds(string lessonPlanPath)
+        {
+            ValidatePlan(lessonPlanPath);
+
+            var listUri = new Uri(new Uri(lessonPlanPath), "lista.html");
+            var file = new WebClient().DownloadString(listUri);
+            var document = BrowsingContext.New().OpenAsync(r => r.Content(file)).Result;
+
+            var classSelect = document.All.Where(e => e.TagName.ToLower() == "select").Where(s => s.Attributes.Where(a => a.Name == "name" && a.Value == "oddzialy").Any()).First();
+            var teacherSelect = document.All.Where(e => e.TagName.ToLower() == "select").Where(s => s.Attributes.Where(a => a.Name == "name" && a.Value == "nauczyciele").Any()).First();
+            var roomSelect = document.All.Where(e => e.TagName.ToLower() == "select").Where(s => s.Attributes.Where(a => a.Name == "name" && a.Value == "sale").Any()).First();
+
+            return (
+                classes: classSelect.Children.Where(o => o.Attributes.Any()).ToDictionary(o => o.InnerHtml, o => o.Attributes.First().Value),
+                teachers: teacherSelect.Children.Where(o => o.Attributes.Any()).ToDictionary(o => o.InnerHtml, o => o.Attributes.First().Value),
+                rooms: roomSelect.Children.Where(o => o.Attributes.Any()).ToDictionary(o => o.InnerHtml, o => o.Attributes.First().Value)
+            );
         }
     }
 }
