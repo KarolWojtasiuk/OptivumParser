@@ -2,23 +2,14 @@ using Xunit;
 
 namespace OptivumParser.Tests
 {
-    public class ParserTests
+    public class ListParserTests
     {
         const string TestPlanUrl = "https://karolwojtasiuk.github.io/testLessonPlan/";
-        [Fact]
-        public void PlanValidatingTest()
-        {
-            var parser = new Parser();
-
-            Assert.True(parser.IsValidPlan(TestPlanUrl).value);
-            Assert.False(parser.IsValidPlan("https://google.pl/").value);
-        }
 
         [Fact]
-        public void GettingClassIdsTest()
+        public void GettingClassesTest()
         {
-            var parser = new Parser();
-            var classes = parser.GetClassIds(TestPlanUrl);
+            var classes = ListParser.GetClassIds(TestPlanUrl);
 
             Assert.NotEmpty(classes);
             Assert.Equal("1", classes["1a"]);
@@ -26,10 +17,9 @@ namespace OptivumParser.Tests
         }
 
         [Fact]
-        public void GettingTeacherIdsTest()
+        public void GettingTeachersTest()
         {
-            var parser = new Parser();
-            var teachers = parser.GetTeacherIds(TestPlanUrl);
+            var teachers = ListParser.GetTeacherIds(TestPlanUrl);
 
             Assert.NotEmpty(teachers);
             Assert.Equal("13", teachers["M.Filipowski (Fm)"]);
@@ -38,10 +28,9 @@ namespace OptivumParser.Tests
         }
 
         [Fact]
-        public void GettingRoomIdsTest()
+        public void GettingRoomsTest()
         {
-            var parser = new Parser();
-            var rooms = parser.GetRoomIds(TestPlanUrl);
+            var rooms = ListParser.GetRoomIds(TestPlanUrl);
 
             Assert.NotEmpty(rooms);
             Assert.Equal("22", rooms["17"]);
@@ -50,10 +39,9 @@ namespace OptivumParser.Tests
         }
 
         [Fact]
-        public void GettingAllIdsTest()
+        public void GettingEverythingTest()
         {
-            var parser = new Parser();
-            var ids = parser.GetAllIds(TestPlanUrl);
+            var ids = ListParser.GetAllIds(TestPlanUrl);
 
             Assert.Equal("14", ids.classes["1gt"]);
             Assert.Equal("14", ids.teachers["J.Frańczuk (Fr)"]);
