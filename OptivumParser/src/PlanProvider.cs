@@ -49,5 +49,23 @@ namespace OptivumParser
             var file = new WebClient().DownloadString(new Uri(PlanUri, "lista.html"));
             return BrowsingContext.New().OpenAsync(r => r.Content(file)).Result;
         }
+
+        public IDocument GetClass(string id)
+        {
+            var file = new WebClient().DownloadString(new Uri(PlanUri, $"plany/o{id}.html"));
+            return BrowsingContext.New().OpenAsync(r => r.Content(file)).Result;
+        }
+
+        public IDocument GetTeacher(string id)
+        {
+            var file = new WebClient().DownloadString(new Uri(PlanUri, $"plany/n{id}.html"));
+            return BrowsingContext.New().OpenAsync(r => r.Content(file)).Result;
+        }
+
+        public IDocument GetRoom(string id)
+        {
+            var file = new WebClient().DownloadString(new Uri(PlanUri, $"plany/s{id}.html"));
+            return BrowsingContext.New().OpenAsync(r => r.Content(file)).Result;
+        }
     }
 }
