@@ -42,8 +42,8 @@ namespace OptivumParser
             {
                 var number = Int32.Parse(row.Children.Where(r => r.ClassName == "nr").Select(r => r.InnerHtml).First());
 
-                var textPeriods = row.Children.Where(r => r.ClassName == "g").Select(r => r.InnerHtml).First().Split('-');
-                var periods = (start: TimeSpan.Parse(textPeriods[0]), end: TimeSpan.Parse(textPeriods[1]));
+                var textPeriod = row.Children.Where(r => r.ClassName == "g").Select(r => r.InnerHtml).First().Split('-');
+                var period = (start: TimeSpan.Parse(textPeriod[0]), end: TimeSpan.Parse(textPeriod[1]));
 
                 var lessons = row.Children.Where(r => r.ClassName == "l").ToList();
 
@@ -53,19 +53,39 @@ namespace OptivumParser
                     //? I have no influence on this, it is the Optivum plan generator's result.
 
                     var dayOfWeek = lessons.IndexOf(lesson) + 1;
-                    var names = lesson.QuerySelectorAll(".p").Select(e => e.InnerHtml).ToList();
-                    var teachers = lesson.QuerySelectorAll(".n").Select(e => e.Attributes[0].Value).ToList();
-                    var rooms = lesson.QuerySelectorAll(".s").Select(e => e.Attributes[0].Value).ToList();
+                    var groups = lesson.QuerySelectorAll("*").ToList();
+                    groups.Add(lesson); //? Sometimes the lessons doesn't have a separate div.
+                    groups = groups.Where(e => e.Children.Where(c => c.ClassName == "p").Any()).ToList();
 
-                    foreach (var group in Enumerable.Range(0, names.Count()))
+                    foreach (var group in groups)
                     {
-                        teachers = teachers.Select(s => new String(s.Where(c => Char.IsDigit(c)).ToArray())).ToList();
-                        rooms = rooms.Select(s => new String(s.Where(c => Char.IsDigit(c)).ToArray())).ToList();
-                    }
+                        var names = group.Children.Where(e => e.ClassName == "p").Select(e => e.InnerHtml);
+                        var teachers = group.Children.Where(e => e.ClassName == "n").Select(e => e.Attributes[0].Value);
+                        var rooms = group.Children.Where(e => e.ClassName == "s").Select(e => e.Attributes[0].Value);
 
-                    foreach (var groupNumber in Enumerable.Range(0, names.Count()))
-                    {
-                        allLessons.Add(new Lesson(number, periods, dayOfWeek, names[groupNumber], id, teachers[groupNumber], rooms[groupNumber]));
+                        //? Protection against lessons without property. In my school, lessons without setted teacher are popular.
+
+                        string name = null;
+                        string teacher = null;
+                        string room = null;
+
+                        if (names.Any())
+                        {
+                            name = names.First();
+                        }
+
+                        if (teachers.Any())
+                        {
+                            teacher = new String(teachers.First().Where(c => Char.IsDigit(c)).ToArray());
+                        }
+
+                        if (rooms.Any())
+                        {
+
+                            room = new String(rooms.First().Where(c => Char.IsDigit(c)).ToArray());
+                        }
+
+                        allLessons.Add(new Lesson(number, period, dayOfWeek, name, id, teacher, room));
                     }
                 }
             }
