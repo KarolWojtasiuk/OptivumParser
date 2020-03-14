@@ -1,5 +1,5 @@
 using System;
-using System.Collections.Generic;
+using System.Text;
 
 namespace OptivumParser
 {
@@ -22,6 +22,26 @@ namespace OptivumParser
             ClassId = classId;
             TeacherId = teacherId;
             RoomId = roomId;
+        }
+
+        public override bool Equals(object obj)
+        {
+            var other = (Lesson)obj;
+
+            if (Number != other.Number) return false;
+            if (Period != other.Period) return false;
+            if (DayOfWeek != other.DayOfWeek) return false;
+            if (Name != other.Name) return false;
+            if (ClassId != other.ClassId) return false;
+            if (TeacherId != other.TeacherId) return false;
+            if (RoomId != other.RoomId) return false;
+
+            return true;
+        }
+
+        public override int GetHashCode()
+        {
+            return Number ^ DayOfWeek ^ BitConverter.ToInt32(Encoding.UTF8.GetBytes(Name), 0);
         }
     }
 }
