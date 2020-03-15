@@ -24,10 +24,26 @@ namespace OptivumParser.Api
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "OptivumParser.Api", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "OptivumParser.Api",
+                    Description = "Open Source project. See more at [GitHub](https://github.com/KarolWojtasiuk/OptivumParser).",
+                    Version = "v1",
+                    Contact = new OpenApiContact()
+                    {
+                        Name = "Karol Wojtasiuk",
+                        Email = "karolwojtasiuk@gmail.com",
+                        Url = new Uri("https://github.com/KarolWojtasiuk")
+                    },
+                    License = new OpenApiLicense()
+                    {
+                        Name = "MIT",
+                        Url = new Uri("https://github.com/KarolWojtasiuk/OptivumParser/blob/master/LICENSE.md")
+                    }
+                });
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                c.IncludeXmlComments(xmlPath);
+                c.IncludeXmlComments(xmlPath, true);
             });
         }
 

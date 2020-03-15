@@ -8,7 +8,7 @@ namespace OptivumParser
 {
     public static class ListParser
     {
-        public static Dictionary<string, string> GetClassIds(PlanProvider provider)
+        public static Dictionary<string, string> GetClasses(PlanProvider provider)
         {
             var document = provider.GetList();
 
@@ -16,7 +16,7 @@ namespace OptivumParser
             return classSelect.Children.Where(o => o.Attributes.Any()).ToDictionary(o => o.InnerHtml, o => o.Attributes.First().Value);
         }
 
-        public static Dictionary<string, string> GetTeacherIds(PlanProvider provider)
+        public static Dictionary<string, string> GetTeachers(PlanProvider provider)
         {
             var document = provider.GetList();
 
@@ -24,7 +24,7 @@ namespace OptivumParser
             return teacherSelect.Children.Where(o => o.Attributes.Any()).ToDictionary(o => o.InnerHtml, o => o.Attributes.First().Value);
         }
 
-        public static Dictionary<string, string> GetRoomIds(PlanProvider provider)
+        public static Dictionary<string, string> GetRooms(PlanProvider provider)
         {
             var document = provider.GetList();
 
@@ -32,7 +32,7 @@ namespace OptivumParser
             return roomSelect.Children.Where(o => o.Attributes.Any()).ToDictionary(o => o.InnerHtml, o => o.Attributes.First().Value);
         }
 
-        public static (Dictionary<string, string> classes, Dictionary<string, string> teachers, Dictionary<string, string> rooms) GetAllIds(PlanProvider provider)
+        public static Dictionary<string, Dictionary<string, string>> GetAll(PlanProvider provider)
         {
             var document = provider.GetList();
 
@@ -40,11 +40,12 @@ namespace OptivumParser
             var teacherSelect = document.All.Where(e => e.TagName.ToLower() == "select").Where(s => s.Attributes.Where(a => a.Name == "name" && a.Value == "nauczyciele").Any()).First();
             var roomSelect = document.All.Where(e => e.TagName.ToLower() == "select").Where(s => s.Attributes.Where(a => a.Name == "name" && a.Value == "sale").Any()).First();
 
-            return (
-                classes: classSelect.Children.Where(o => o.Attributes.Any()).ToDictionary(o => o.InnerHtml, o => o.Attributes.First().Value),
-                teachers: teacherSelect.Children.Where(o => o.Attributes.Any()).ToDictionary(o => o.InnerHtml, o => o.Attributes.First().Value),
-                rooms: roomSelect.Children.Where(o => o.Attributes.Any()).ToDictionary(o => o.InnerHtml, o => o.Attributes.First().Value)
-            );
+            return new Dictionary<string, Dictionary<string, string>>()
+            {
+                {"classes", classSelect.Children.Where(o => o.Attributes.Any()).ToDictionary(o => o.InnerHtml, o => o.Attributes.First().Value)},
+                {"teachers", teacherSelect.Children.Where(o => o.Attributes.Any()).ToDictionary(o => o.InnerHtml, o => o.Attributes.First().Value)},
+                {"rooms", roomSelect.Children.Where(o => o.Attributes.Any()).ToDictionary(o => o.InnerHtml, o => o.Attributes.First().Value)}
+            };
         }
     }
 }
