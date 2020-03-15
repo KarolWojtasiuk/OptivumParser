@@ -9,7 +9,8 @@ namespace OptivumParser.Tests
         [Fact]
         public void GettingClassesTest()
         {
-            var classes = ListParser.GetClassIds(TestPlanUrl);
+            var provider = new PlanProvider(TestPlanUrl);
+            var classes = ListParser.GetClassIds(provider);
 
             Assert.NotEmpty(classes);
             Assert.Equal("1", classes["1a"]);
@@ -19,7 +20,8 @@ namespace OptivumParser.Tests
         [Fact]
         public void GettingTeachersTest()
         {
-            var teachers = ListParser.GetTeacherIds(TestPlanUrl);
+            var provider = new PlanProvider(TestPlanUrl);
+            var teachers = ListParser.GetTeacherIds(provider);
 
             Assert.NotEmpty(teachers);
             Assert.Equal("13", teachers["M.Filipowski (Fm)"]);
@@ -30,7 +32,8 @@ namespace OptivumParser.Tests
         [Fact]
         public void GettingRoomsTest()
         {
-            var rooms = ListParser.GetRoomIds(TestPlanUrl);
+            var provider = new PlanProvider(TestPlanUrl);
+            var rooms = ListParser.GetRoomIds(provider);
 
             Assert.NotEmpty(rooms);
             Assert.Equal("22", rooms["17"]);
@@ -41,7 +44,8 @@ namespace OptivumParser.Tests
         [Fact]
         public void GettingEverythingTest()
         {
-            var ids = ListParser.GetAllIds(TestPlanUrl);
+            var provider = new PlanProvider(TestPlanUrl);
+            var ids = ListParser.GetAllIds(provider);
 
             Assert.Equal("14", ids.classes["1gt"]);
             Assert.Equal("14", ids.teachers["J.Frańczuk (Fr)"]);
