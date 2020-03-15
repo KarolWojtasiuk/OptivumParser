@@ -16,7 +16,7 @@ namespace OptivumParser.Api.Controllers
         /// </summary>
         /// <param name="planUrl">Url to the lesson plan main page.</param>
         /// <response code="400">If the required parameter is null</response>
-        [HttpGet("classes")]
+        [HttpGet("[action]")]
         public ActionResult Classes([FromQuery][Required]string planUrl)
         {
             if (String.IsNullOrWhiteSpace(planUrl))
@@ -35,7 +35,7 @@ namespace OptivumParser.Api.Controllers
         /// </summary>
         /// <param name="planUrl">Url to the lesson plan main page.</param>
         /// <response code="400">If the required parameter is null</response>
-        [HttpGet("teachers")]
+        [HttpGet("[action]")]
         public ActionResult Teachers([FromQuery][Required]string planUrl)
         {
             if (String.IsNullOrWhiteSpace(planUrl))
@@ -54,7 +54,7 @@ namespace OptivumParser.Api.Controllers
         /// </summary>
         /// <param name="planUrl">Url to the lesson plan main page.</param>
         /// <response code="400">If the required parameter is null</response>
-        [HttpGet("rooms")]
+        [HttpGet("[action]")]
         public ActionResult Rooms([FromQuery][Required]string planUrl)
         {
             if (String.IsNullOrWhiteSpace(planUrl))
@@ -73,7 +73,7 @@ namespace OptivumParser.Api.Controllers
         /// </summary>
         /// <param name="planUrl">Url to the lesson plan main page.</param>
         /// <response code="400">If the required parameter is null</response>
-        [HttpGet("all")]
+        [HttpGet("[action]")]
         public ActionResult All([FromQuery][Required]string planUrl)
         {
             if (String.IsNullOrWhiteSpace(planUrl))
