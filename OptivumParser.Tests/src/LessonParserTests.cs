@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Collections.Generic;
 using Xunit;
 
 namespace OptivumParser.Tests
@@ -16,7 +17,7 @@ namespace OptivumParser.Tests
             var expectedLesson = new Lesson()
             {
                 Number = 3,
-                Period = (start: TimeSpan.Parse("9:50"), end: TimeSpan.Parse("10:35")),
+                Period = new Period() { Start = "09:50:00", End = "10:35:00" },
                 DayOfWeek = 1,
                 Name = "zaj. wych.",
                 ClassId = "24",
@@ -37,7 +38,7 @@ namespace OptivumParser.Tests
             var expectedLesson = new Lesson()
             {
                 Number = 3,
-                Period = (start: TimeSpan.Parse("9:50"), end: TimeSpan.Parse("10:35")),
+                Period = new Period() { Start = "09:50:00", End = "10:35:00" },
                 DayOfWeek = 1,
                 Name = "zaj. wych.",
                 ClassId = "24",
@@ -58,7 +59,7 @@ namespace OptivumParser.Tests
             var expectedLesson = new Lesson()
             {
                 Number = 3,
-                Period = (start: TimeSpan.Parse("9:50"), end: TimeSpan.Parse("10:35")),
+                Period = new Period() { Start = "09:50:00", End = "10:35:00" },
                 DayOfWeek = 1,
                 Name = "zaj. wych.",
                 ClassId = "24",
