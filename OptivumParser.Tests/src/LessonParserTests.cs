@@ -13,8 +13,18 @@ namespace OptivumParser.Tests
         {
             var provider = new PlanProvider(TestPlanUrl);
 
-            var expectedLesson = new Lesson(3, (start: TimeSpan.Parse("9:50"), end: TimeSpan.Parse("10:35")), 1, "zaj. wych.", "24", "13", "49");
-            var actualLesson = LessonParser.GetLessonsForClass(TestPlanUrl, "24").Where(l => l.DayOfWeek == 1 && l.Number == 3).First();
+            var expectedLesson = new Lesson()
+            {
+                Number = 3,
+                Period = (start: TimeSpan.Parse("9:50"), end: TimeSpan.Parse("10:35")),
+                DayOfWeek = 1,
+                Name = "zaj. wych.",
+                ClassId = "24",
+                TeacherId = "13",
+                RoomId = "49"
+            };
+
+            var actualLesson = LessonParser.GetLessonsForClass(provider, "24").Where(l => l.DayOfWeek == 1 && l.Number == 3).First();
 
             Assert.Equal(expectedLesson, actualLesson);
         }
@@ -24,8 +34,18 @@ namespace OptivumParser.Tests
         {
             var provider = new PlanProvider(TestPlanUrl);
 
-            var expectedLesson = new Lesson(3, (start: TimeSpan.Parse("9:50"), end: TimeSpan.Parse("10:35")), 1, "zaj. wych.", "24", "13", "49");
-            var actualLesson = LessonParser.GetLessonsForTeacher(TestPlanUrl, "13").Where(l => l.DayOfWeek == 1 && l.Number == 3).First();
+            var expectedLesson = new Lesson()
+            {
+                Number = 3,
+                Period = (start: TimeSpan.Parse("9:50"), end: TimeSpan.Parse("10:35")),
+                DayOfWeek = 1,
+                Name = "zaj. wych.",
+                ClassId = "24",
+                TeacherId = "13",
+                RoomId = "49"
+            };
+
+            var actualLesson = LessonParser.GetLessonsForTeacher(provider, "13").Where(l => l.DayOfWeek == 1 && l.Number == 3).First();
 
             Assert.Equal(expectedLesson, actualLesson);
         }
@@ -35,8 +55,18 @@ namespace OptivumParser.Tests
         {
             var provider = new PlanProvider(TestPlanUrl);
 
-            var expectedLesson = new Lesson(3, (start: TimeSpan.Parse("9:50"), end: TimeSpan.Parse("10:35")), 1, "zaj. wych.", "24", "13", "49");
-            var actualLesson = LessonParser.GetLessonsForRoom(TestPlanUrl, "49").Where(l => l.DayOfWeek == 1 && l.Number == 3).First();
+            var expectedLesson = new Lesson()
+            {
+                Number = 3,
+                Period = (start: TimeSpan.Parse("9:50"), end: TimeSpan.Parse("10:35")),
+                DayOfWeek = 1,
+                Name = "zaj. wych.",
+                ClassId = "24",
+                TeacherId = "13",
+                RoomId = "49"
+            };
+
+            var actualLesson = LessonParser.GetLessonsForRoom(provider, "49").Where(l => l.DayOfWeek == 1 && l.Number == 3).First();
 
             Assert.Equal(expectedLesson, actualLesson);
         }
@@ -46,9 +76,9 @@ namespace OptivumParser.Tests
         {
             var provider = new PlanProvider(TestPlanUrl);
 
-            var lessonForClass = LessonParser.GetLessonsForClass(TestPlanUrl, "24").Where(l => l.DayOfWeek == 1 && l.Number == 6).First();
-            var lessonForTeacher = LessonParser.GetLessonsForTeacher(TestPlanUrl, "14").Where(l => l.DayOfWeek == 1 && l.Number == 6).First();
-            var lessonForRoom = LessonParser.GetLessonsForRoom(TestPlanUrl, "41").Where(l => l.DayOfWeek == 1 && l.Number == 6).First();
+            var lessonForClass = LessonParser.GetLessonsForClass(provider, "24").Where(l => l.DayOfWeek == 1 && l.Number == 6).First();
+            var lessonForTeacher = LessonParser.GetLessonsForTeacher(provider, "14").Where(l => l.DayOfWeek == 1 && l.Number == 6).First();
+            var lessonForRoom = LessonParser.GetLessonsForRoom(provider, "41").Where(l => l.DayOfWeek == 1 && l.Number == 6).First();
 
             Assert.Equal(lessonForClass, lessonForTeacher);
             Assert.Equal(lessonForClass, lessonForRoom);

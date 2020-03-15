@@ -10,9 +10,8 @@ namespace OptivumParser
         {
             Class, Teacher, Room
         }
-        public static List<Lesson> GetLessonsForClass(string lessonPlanPath, string classId)
+        public static List<Lesson> GetLessonsForClass(PlanProvider provider, string classId)
         {
-            var provider = new PlanProvider(lessonPlanPath);
             var document = provider.GetClass(classId);
 
             var lessonTable = document.All.Where(e => e.ClassName == "tabela").First().Children.First();
@@ -48,8 +47,8 @@ namespace OptivumParser
                         //? Protection against lessons without property. In my school, lessons without setted teacher are popular.
 
                         string name = null;
-                        string teacher = null;
-                        string room = null;
+                        string teacherId = null;
+                        string roomId = null;
 
                         if (names.Any())
                         {
@@ -58,25 +57,33 @@ namespace OptivumParser
 
                         if (teachers.Any())
                         {
-                            teacher = new String(teachers.First().Where(c => Char.IsDigit(c)).ToArray());
+                            teacherId = new String(teachers.First().Where(c => Char.IsDigit(c)).ToArray());
                         }
 
                         if (rooms.Any())
                         {
 
-                            room = new String(rooms.First().Where(c => Char.IsDigit(c)).ToArray());
+                            roomId = new String(rooms.First().Where(c => Char.IsDigit(c)).ToArray());
                         }
 
-                        allLessons.Add(new Lesson(number, period, dayOfWeek, name, classId, teacher, room));
+                        allLessons.Add(new Lesson()
+                        {
+                            Number = number,
+                            Period = period,
+                            DayOfWeek = dayOfWeek,
+                            Name = name,
+                            ClassId = classId,
+                            TeacherId = teacherId,
+                            RoomId = roomId
+                        });
                     }
                 }
             }
             return allLessons;
         }
 
-        public static List<Lesson> GetLessonsForTeacher(string lessonPlanPath, string teacherId)
+        public static List<Lesson> GetLessonsForTeacher(PlanProvider provider, string teacherId)
         {
-            var provider = new PlanProvider(lessonPlanPath);
             var document = provider.GetTeacher(teacherId);
 
             var lessonTable = document.All.Where(e => e.ClassName == "tabela").First().Children.First();
@@ -112,8 +119,8 @@ namespace OptivumParser
                         //? Protection against lessons without property. In my school, lessons without setted teacher are popular.
 
                         string name = null;
-                        string @class = null;
-                        string room = null;
+                        string classId = null;
+                        string roomId = null;
 
                         if (names.Any())
                         {
@@ -122,25 +129,33 @@ namespace OptivumParser
 
                         if (classes.Any())
                         {
-                            @class = new String(classes.First().Where(c => Char.IsDigit(c)).ToArray());
+                            classId = new String(classes.First().Where(c => Char.IsDigit(c)).ToArray());
                         }
 
                         if (rooms.Any())
                         {
 
-                            room = new String(rooms.First().Where(c => Char.IsDigit(c)).ToArray());
+                            roomId = new String(rooms.First().Where(c => Char.IsDigit(c)).ToArray());
                         }
 
-                        allLessons.Add(new Lesson(number, period, dayOfWeek, name, @class, teacherId, room));
+                        allLessons.Add(new Lesson()
+                        {
+                            Number = number,
+                            Period = period,
+                            DayOfWeek = dayOfWeek,
+                            Name = name,
+                            ClassId = classId,
+                            TeacherId = teacherId,
+                            RoomId = roomId
+                        });
                     }
                 }
             }
             return allLessons;
         }
 
-        public static List<Lesson> GetLessonsForRoom(string lessonPlanPath, string roomId)
+        public static List<Lesson> GetLessonsForRoom(PlanProvider provider, string roomId)
         {
-            var provider = new PlanProvider(lessonPlanPath);
             var document = provider.GetRoom(roomId);
 
             var lessonTable = document.All.Where(e => e.ClassName == "tabela").First().Children.First();
@@ -176,8 +191,8 @@ namespace OptivumParser
                         //? Protection against lessons without property. In my school, lessons without setted teacher are popular.
 
                         string name = null;
-                        string @class = null;
-                        string teacher = null;
+                        string classId = null;
+                        string teacherId = null;
 
                         if (names.Any())
                         {
@@ -186,16 +201,25 @@ namespace OptivumParser
 
                         if (classes.Any())
                         {
-                            @class = new String(classes.First().Where(c => Char.IsDigit(c)).ToArray());
+                            classId = new String(classes.First().Where(c => Char.IsDigit(c)).ToArray());
                         }
 
                         if (teachers.Any())
                         {
 
-                            teacher = new String(teachers.First().Where(c => Char.IsDigit(c)).ToArray());
+                            teacherId = new String(teachers.First().Where(c => Char.IsDigit(c)).ToArray());
                         }
 
-                        allLessons.Add(new Lesson(number, period, dayOfWeek, name, @class, teacher, roomId));
+                        allLessons.Add(new Lesson()
+                        {
+                            Number = number,
+                            Period = period,
+                            DayOfWeek = dayOfWeek,
+                            Name = name,
+                            ClassId = classId,
+                            TeacherId = teacherId,
+                            RoomId = roomId
+                        });
                     }
                 }
             }
