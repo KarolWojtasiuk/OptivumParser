@@ -1,4 +1,5 @@
 using System;
+using System.Net;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,7 +33,7 @@ namespace OptivumParser.Api.Controllers
                     var provider = new PlanProvider(planUrl);
                     return Ok(LessonParser.GetLessonsForClass(provider, classId));
                 }
-                catch (System.Net.WebException e)
+                catch (WebException e)
                 {
                     return StatusCode(406, $"Error during plan download: '{e.Message}'");
                 }
@@ -60,7 +61,7 @@ namespace OptivumParser.Api.Controllers
                     var provider = new PlanProvider(planUrl);
                     return Ok(LessonParser.GetLessonsForTeacher(provider, teacherId));
                 }
-                catch (System.Net.WebException e)
+                catch (WebException e)
                 {
                     return StatusCode(406, $"Error during plan download: '{e.Message}'");
                 }
@@ -88,7 +89,7 @@ namespace OptivumParser.Api.Controllers
                     var provider = new PlanProvider(planUrl);
                     return Ok(LessonParser.GetLessonsForRoom(provider, roomId));
                 }
-                catch (System.Net.WebException e)
+                catch (WebException e)
                 {
                     return StatusCode(406, $"Error during plan download: '{e.Message}'");
                 }
