@@ -9,10 +9,10 @@ namespace OptivumParser
         /// </summary>
         public static LessonPlan GetEntirePlan(PlanProvider provider)
         {
-            var ids = ListParser.GetAllIds(provider);
-            var classes = ids.classes;
-            var teachers = ids.teachers;
-            var rooms = ids.rooms;
+            var ids = ListParser.GetAll(provider);
+            var classes = ids["classes"];
+            var teachers = ids["teachers"];
+            var rooms = ids["rooms"];
 
             var lessons = new List<Lesson>();
             foreach (var classId in classes)
