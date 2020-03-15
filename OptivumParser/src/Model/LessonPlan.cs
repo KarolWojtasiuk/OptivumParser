@@ -5,10 +5,9 @@ namespace OptivumParser
 {
     public class LessonPlan
     {
-        public List<Dictionary<string, string>> Classes { get; }
-        public List<Dictionary<string, string>> Teachers { get; }
-        public List<Dictionary<string, string>> Rooms { get; }
-        public DateTime GeneratedDate { get; }
-        public DateTime EffectiveDate { get; }
+        public Dictionary<string, string> Classes { get; set; }
+        public Dictionary<string, string> Teachers { get; set; }
+        public Dictionary<string, string> Rooms { get; set; }
+        public List<Lesson> Lessons { get; set; }
     }
 }
