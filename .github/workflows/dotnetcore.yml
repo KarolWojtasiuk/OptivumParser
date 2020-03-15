@@ -16,5 +16,7 @@ jobs:
           dotnet-version: 3.1.102
       - name: Build
         run: dotnet build OptivumParser --configuration Release
+      - name: Build Api
+        run: dotnet build OptivumParser.Api --configuration Release
       - name: Test
         run: dotnet test OptivumParser.Tests
