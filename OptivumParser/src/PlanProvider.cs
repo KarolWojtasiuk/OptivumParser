@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Net;
 using System.Linq;
 using AngleSharp;
@@ -46,25 +47,25 @@ namespace OptivumParser
 
         public IDocument GetList()
         {
-            var file = new WebClient().DownloadString(new Uri(PlanUri, "lista.html"));
+            var file = new WebClient().DownloadString(new Uri(Path.Combine(PlanUri.ToString(), "lista.html")));
             return BrowsingContext.New().OpenAsync(r => r.Content(file)).Result;
         }
 
         public IDocument GetClass(string id)
         {
-            var file = new WebClient().DownloadString(new Uri(PlanUri, $"plany/o{id}.html"));
+            var file = new WebClient().DownloadString(new Uri(Path.Combine(PlanUri.ToString(), $"plany/o{id}.html")));
             return BrowsingContext.New().OpenAsync(r => r.Content(file)).Result;
         }
 
         public IDocument GetTeacher(string id)
         {
-            var file = new WebClient().DownloadString(new Uri(PlanUri, $"plany/n{id}.html"));
+            var file = new WebClient().DownloadString(new Uri(Path.Combine(PlanUri.ToString(), $"plany/n{id}.html")));
             return BrowsingContext.New().OpenAsync(r => r.Content(file)).Result;
         }
 
         public IDocument GetRoom(string id)
         {
-            var file = new WebClient().DownloadString(new Uri(PlanUri, $"plany/s{id}.html"));
+            var file = new WebClient().DownloadString(new Uri(Path.Combine(PlanUri.ToString(), $"plany/s{id}.html")));
             return BrowsingContext.New().OpenAsync(r => r.Content(file)).Result;
         }
     }
