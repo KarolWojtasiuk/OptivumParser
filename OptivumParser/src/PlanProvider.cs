@@ -13,7 +13,7 @@ namespace OptivumParser
 
         public PlanProvider(string url)
         {
-            PlanUri = new Uri(url);
+            PlanUri = new Uri(url.Replace("index.html", String.Empty));
             VerifyLessonPlan();
         }
 

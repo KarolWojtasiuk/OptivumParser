@@ -6,7 +6,7 @@ namespace OptivumParser
     public class Lesson
     {
         public int Number { get; set; }
-        public (TimeSpan start, TimeSpan end) Period { get; set; }
+        public Period Period { get; set; }
         public int DayOfWeek { get; set; }
         public string Name { get; set; }
         public string ClassId { get; set; }
@@ -18,7 +18,8 @@ namespace OptivumParser
             var other = (Lesson)obj;
 
             if (Number != other.Number) return false;
-            if (Period != other.Period) return false;
+            if (Period.Start != other.Period.Start) return false;
+            if (Period.End != other.Period.End) return false;
             if (DayOfWeek != other.DayOfWeek) return false;
             if (Name != other.Name) return false;
             if (ClassId != other.ClassId) return false;

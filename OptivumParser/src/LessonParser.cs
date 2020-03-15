@@ -24,7 +24,7 @@ namespace OptivumParser
                 var number = Int32.Parse(row.Children.Where(r => r.ClassName == "nr").Select(r => r.InnerHtml).First());
 
                 var textPeriod = row.Children.Where(r => r.ClassName == "g").Select(r => r.InnerHtml).First().Split('-');
-                var period = (start: TimeSpan.Parse(textPeriod[0]), end: TimeSpan.Parse(textPeriod[1]));
+                var period = new Period() { Start = TimeSpan.Parse(textPeriod[0]).ToString(), End = TimeSpan.Parse(textPeriod[1]).ToString() };
 
                 var lessons = row.Children.Where(r => r.ClassName == "l").ToList();
 
@@ -96,7 +96,7 @@ namespace OptivumParser
                 var number = Int32.Parse(row.Children.Where(r => r.ClassName == "nr").Select(r => r.InnerHtml).First());
 
                 var textPeriod = row.Children.Where(r => r.ClassName == "g").Select(r => r.InnerHtml).First().Split('-');
-                var period = (start: TimeSpan.Parse(textPeriod[0]), end: TimeSpan.Parse(textPeriod[1]));
+                var period = new Period() { Start = TimeSpan.Parse(textPeriod[0]).ToString(), End = TimeSpan.Parse(textPeriod[1]).ToString() };
 
                 var lessons = row.Children.Where(r => r.ClassName == "l").ToList();
 
@@ -168,7 +168,7 @@ namespace OptivumParser
                 var number = Int32.Parse(row.Children.Where(r => r.ClassName == "nr").Select(r => r.InnerHtml).First());
 
                 var textPeriod = row.Children.Where(r => r.ClassName == "g").Select(r => r.InnerHtml).First().Split('-');
-                var period = (start: TimeSpan.Parse(textPeriod[0]), end: TimeSpan.Parse(textPeriod[1]));
+                var period = new Period() { Start = TimeSpan.Parse(textPeriod[0]).ToString(), End = TimeSpan.Parse(textPeriod[1]).ToString() };
 
                 var lessons = row.Children.Where(r => r.ClassName == "l").ToList();
 
