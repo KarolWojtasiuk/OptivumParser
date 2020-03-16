@@ -51,7 +51,7 @@ Just run the Test Runner.
 ## Built With
 * [AngleSharp](https://github.com/AngleSharp/AngleSharp) - HTML Parsing Library.
 * [xUnit](https://github.com/xunit/xunit) - Testing framework.
-* [Swashbuckle](https://github.com/xunit/xunit) - Swagger documents generating library.
+* [Swashbuckle](https://github.com/domaindrivendev/Swashbuckle.AspNetCore) - Swagger documents generating library.
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
