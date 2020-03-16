@@ -36,6 +36,10 @@ namespace OptivumParser.Api.Controllers
                 {
                     return StatusCode(406, e.Message);
                 }
+                catch (UriFormatException e)
+                {
+                    return StatusCode(406, $"Error during parsing url: '{e.Message}'");
+                }
             }
         }
 
@@ -53,8 +57,19 @@ namespace OptivumParser.Api.Controllers
             }
             else
             {
-                var provider = new PlanProvider(planUrl);
-                return Ok(ListParser.GetClasses(provider));
+                try
+                {
+                    var provider = new PlanProvider(planUrl);
+                    return Ok(ListParser.GetClasses(provider));
+                }
+                catch (InvalidNameException e)
+                {
+                    return StatusCode(406, e.Message);
+                }
+                catch (UriFormatException e)
+                {
+                    return StatusCode(406, $"Error during parsing url: '{e.Message}'");
+                }
             }
         }
 
@@ -83,6 +98,10 @@ namespace OptivumParser.Api.Controllers
                 {
                     return StatusCode(406, e.Message);
                 }
+                catch (UriFormatException e)
+                {
+                    return StatusCode(406, $"Error during parsing url: '{e.Message}'");
+                }
             }
         }
 
@@ -100,8 +119,19 @@ namespace OptivumParser.Api.Controllers
             }
             else
             {
-                var provider = new PlanProvider(planUrl);
-                return Ok(ListParser.GetTeachers(provider));
+                try
+                {
+                    var provider = new PlanProvider(planUrl);
+                    return Ok(ListParser.GetTeachers(provider));
+                }
+                catch (InvalidNameException e)
+                {
+                    return StatusCode(406, e.Message);
+                }
+                catch (UriFormatException e)
+                {
+                    return StatusCode(406, $"Error during parsing url: '{e.Message}'");
+                }
             }
         }
 
@@ -130,6 +160,10 @@ namespace OptivumParser.Api.Controllers
                 {
                     return StatusCode(406, e.Message);
                 }
+                catch (UriFormatException e)
+                {
+                    return StatusCode(406, $"Error during parsing url: '{e.Message}'");
+                }
             }
         }
 
@@ -147,8 +181,19 @@ namespace OptivumParser.Api.Controllers
             }
             else
             {
-                var provider = new PlanProvider(planUrl);
-                return Ok(ListParser.GetRooms(provider));
+                try
+                {
+                    var provider = new PlanProvider(planUrl);
+                    return Ok(ListParser.GetRooms(provider));
+                }
+                catch (InvalidNameException e)
+                {
+                    return StatusCode(406, e.Message);
+                }
+                catch (UriFormatException e)
+                {
+                    return StatusCode(406, $"Error during parsing url: '{e.Message}'");
+                }
             }
         }
 
@@ -166,8 +211,19 @@ namespace OptivumParser.Api.Controllers
             }
             else
             {
-                var provider = new PlanProvider(planUrl);
-                return Ok(ListParser.GetAll(provider));
+                try
+                {
+                    var provider = new PlanProvider(planUrl);
+                    return Ok(ListParser.GetAll(provider));
+                }
+                catch (InvalidNameException e)
+                {
+                    return StatusCode(406, e.Message);
+                }
+                catch (UriFormatException e)
+                {
+                    return StatusCode(406, $"Error during parsing url: '{e.Message}'");
+                }
             }
         }
     }
