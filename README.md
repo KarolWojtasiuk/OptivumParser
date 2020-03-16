@@ -1,5 +1,6 @@
 # OptivumParser
 Optivum lesson plans parser, the project consists of a core library, tests and api.
+
 ![Nuget](https://img.shields.io/nuget/v/OptivumParser?style=for-the-badge)
 ![Build Status](https://img.shields.io/github/workflow/status/KarolWojtasiuk/OptivumParser/.NET%20Core/master?style=for-the-badge)
 ![License](https://img.shields.io/github/license/KarolWojtasiuk/OptivumParser?style=for-the-badge)
