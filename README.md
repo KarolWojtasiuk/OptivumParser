@@ -18,6 +18,11 @@ Go to the root directory of your project.
 Then install nuget package.
 > dotnet add package OptivumParser
 
+
+### Docker
+> docker pull karolwojtasiuk/optivum-parser:latest
+> docker run --name optivum-parser -p 80:80 karolwojtasiuk/optivum-parser:latest
+
 ### Example
 ```csharp
 var provider = new PlanProvider("https://mySchool.pl/lessonPlan");
