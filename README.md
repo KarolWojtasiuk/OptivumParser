@@ -20,7 +20,7 @@ Then install nuget package.
 
 
 ### Docker
-> docker pull karolwojtasiuk/optivum-parser:latest
+> docker pull karolwojtasiuk/optivum-parser:latest  
 > docker run --name optivum-parser -p 80:80 karolwojtasiuk/optivum-parser:latest
 
 ### Example
