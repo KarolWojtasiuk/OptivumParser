@@ -24,19 +24,24 @@ namespace OptivumParser
                 var file = new WebClient().DownloadString(PlanUri);
                 var document = BrowsingContext.New().OpenAsync(r => r.Content(file)).Result;
 
-                var frames = document.All.Where(e => e.TagName.ToLower() == "frame");
+                var frames = document.All.Where(e => e.TagName.ToLower() == "frame").ToList();
                 if (frames.Count() == 2)
                 {
-                    if ((frames.Where(f => f.Attributes.Where(a => a.Name == "name" && a.Value == "plan").Any()).Count() != 1)
-                    && (frames.Where(f => f.Attributes.Where(a => a.Name == "name" && a.Value == "list").Any()).Count() != 1))
+                    if (frames.Count(f =>
+                            f.Attributes.Any(a => a.Name == "name" && a.Value == "plan")) !=
+                        1
+                        && frames.Count(f =>
+                            f.Attributes.Any(a => a.Name == "name" && a.Value == "list")) !=
+                        1)
                     {
-                        throw new Exception("Unsupported or invalid lesson plan page. Make sure you provide the root address of the plan.");
+                        throw new Exception(
+                            "Unsupported or invalid lesson plan page. Make sure you provide the root address of the plan.");
                     }
                 }
                 else
                 {
-
-                    throw new Exception("Unsupported or invalid lesson plan page. Make sure you provide the root address of the plan.");
+                    throw new Exception(
+                        "Unsupported or invalid lesson plan page. Make sure you provide the root address of the plan.");
                 }
             }
             else

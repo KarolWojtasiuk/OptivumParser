@@ -3,31 +3,15 @@ using System.Text;
 
 namespace OptivumParser
 {
-    public class Lesson
+    public record Lesson
     {
-        public int Number { get; set; }
-        public Period Period { get; set; }
-        public int DayOfWeek { get; set; }
-        public string Name { get; set; }
-        public string ClassId { get; set; }
-        public string TeacherId { get; set; }
-        public string RoomId { get; set; }
-
-        public override bool Equals(object obj)
-        {
-            var other = (Lesson)obj;
-
-            if (Number != other.Number) return false;
-            if (Period.Start != other.Period.Start) return false;
-            if (Period.End != other.Period.End) return false;
-            if (DayOfWeek != other.DayOfWeek) return false;
-            if (Name != other.Name) return false;
-            if (ClassId != other.ClassId) return false;
-            if (TeacherId != other.TeacherId) return false;
-            if (RoomId != other.RoomId) return false;
-
-            return true;
-        }
+        public int Number { get; init; }
+        public Period Period { get; init; }
+        public int DayOfWeek { get; init; }
+        public string Name { get; init; }
+        public string ClassId { get; init; }
+        public string TeacherId { get; init; }
+        public string RoomId { get; init; }
 
         public override int GetHashCode()
         {

@@ -1,15 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
-    <PackageId>OptivumParser</PackageId>
-    <Version>1.0.0</Version>
-    <Authors>KarolWojtasiuk</Authors>
-    <PackageTags>Optivum;Parser;Lesson;Plan;Timetable;Api</PackageTags>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <PackageId>OptivumParser</PackageId>
+        <Version>1.0.0</Version>
+        <Authors>KarolWojtasiuk</Authors>
+        <PackageTags>Optivum;Parser;Lesson;Plan;Timetable;Api</PackageTags>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="AngleSharp" Version="0.13.0" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="AngleSharp" Version="0.13.0"/>
+    </ItemGroup>
 
 </Project>
