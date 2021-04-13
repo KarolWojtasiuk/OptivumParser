@@ -24,8 +24,8 @@ jobs:
       - name: Test
         run: dotnet test OptivumParser.Tests
       - name: Publish NuGet package
-      uses: rohith/publish-nuget@v2
-      with:
-        PROJECT_FILE_PATH: OptivumParser/OptivumParser.csproj
-        PACKAGE_NAME: OptivumParser
-        NUGET_KEY: ${{secrets.NUGET_KEY}}
+        uses: rohith/publish-nuget@v2
+        with:
+          PROJECT_FILE_PATH: OptivumParser/OptivumParser.csproj
+          PACKAGE_NAME: OptivumParser
+          NUGET_KEY: ${{secrets.NUGET_KEY}}
